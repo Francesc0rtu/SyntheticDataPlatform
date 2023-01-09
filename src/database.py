@@ -43,20 +43,24 @@ class Database():
         print(bcolors.OKGREEN + "Connected to the database" + bcolors.ENDC)
         return db
 
-    def load_input_data(self, filename, username):
+    def load_input_data(self, filename):
+        username = filename.split("-")[0]
         path = "DATA/input/" + filename
 
         with open(path, "rb") as file:
             encoded = base64.b64encode(file.read())
         self.InputData.put(encoded, filename=filename, username=username)
     
-    def load_output_data(self, filename, base_dataset_filename, username):
+    def load_output_data(self, filename, base_dataset_filename):
+        username = filename.split("-")[0]
         path = "DATA/output/" + filename
+
         with open(path, "rb") as file:
             encoded = base64.b64encode(file.read())
         self.OutputData.put(encoded, filename=filename, username=username, base_dataset=base_dataset_filename)
 
-    def get_input_data(self, filename, username):
+    def get_input_data(self, filename):
+        username = filename.split("-")[0]
         path = "DATA/input/" + filename
 
         #if the file is already in the local machine do not retrive
@@ -66,7 +70,8 @@ class Database():
         with open(path, 'wb') as f:  
             f.write(base64.b64decode(file.read()))
         
-    def get_output_data(self, filename, username):
+    def get_output_data(self, filename):
+        username = filename.split("-")[0]
         path = "DATA/output/" + filename
 
         #if the file is already in the local machine do not retrive
