@@ -1,28 +1,39 @@
-<html>
+{% extends "base.html" %}
+{% block content %}
+
+
   <div align="center">
     <div align="center" class="border">
       <head>
         <title>Synthetic Data Platform </title>
-        <h1> <a href="files">Download synthetic data</a> </h1>
+        <h1> <a href="files">Download synthetic data already generated</a> </h1>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
       </head>
       <body>
-        <div class="container">
+        
+          <p>Hello!</p>
+        
+         <div class="container">
           <h1>Please login </h1>
           <br>
-          <form action="" method="post">
-            <input type="text" placeholder="Username" name="username" value="{{
-              request.form.username }}">
-            <input type="password" placeholder="Password" name="password" value="{{
-              request.form.password }}">
-            <input class="btn btn-default" type="submit" value="Login">
+          <form method="POST"  enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <p>
+            {{ form.name.label }} {{form.name}}
+            </p>
+            <p>
+            {{ form.password.label }} {{form.password}}
+            </p>
+
+            <input type="submit">
           </form>
           {% if error %}
             <p class="error"><strong>Error:</strong> {{ error }}
           {% endif %}
-          <a href="register"> Register</a> 
         </div>
       </body>
     </div>
   </div>
-</html>
+
+{% endblock %}

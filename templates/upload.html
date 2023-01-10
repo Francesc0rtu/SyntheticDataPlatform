@@ -2,11 +2,18 @@
 {% block title%} {{ title }} {% endblock %}
 {% block content%}
 <html lang="en">
+  <div align="right">
+    {% if current_user.is_authenticated %}
+      <p>Hello, {{ username }}!</p>
+    {% endif %}
+    <b> <a href="logout"> Logout </a></b>
+  </div>
   <div align="center">
     <div align="center" class="border">
       <head>
           <meta charset="UTF-8" />
           <title>File upload</title>
+          
       </head>
       <body>
           <h1> <a href="files">Download synthetic data</a> </h1>
@@ -24,11 +31,19 @@
               {% endwith %}
           </p>
           <h3>Select a file to upload</h3>
-          <form action="/" method="POST" enctype="multipart/form-data">
+          <form action="/upload" method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
               <p>Upload all csv files and the json description:</p>
-              <input type="file" name="file" multiple="">
-              <input type="submit" value="Submit" />
+              {{form.files(multiple="multiple")}}
+              {{form.dataset_name}}
+              <!-- <input type="string" name="description" placeholder="Dataset Name"> -->
+              {{ form.submit }}
           </form>
+          <br><br>
+          {% if msg %}
+             {{ msg }}
+          {% endif %}
+          For more information about the format of the json file, please refer to the <a href="documentation">documentation</a>.
       </body>
     </div>
   </div>

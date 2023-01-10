@@ -14,6 +14,7 @@ class Database():
         self.db = self.connect_to_database()
         self.InputData = gridfs.GridFS(self.db, 'InputData')
         self.OutputData = gridfs.GridFS(self.db, 'OutputData')
+        self.User = self.db["User"]
         self.input_path = "DATA/input/"
         self.output_path = "DATA/output/"
 
@@ -32,12 +33,10 @@ class Database():
         #     username = input("Username: ") 
         #     password = getpass()
 
-        username = os.getenv("MONGO_USER")
-        password = os.getenv("MONGO_PASS")
-        mongo_host = os.getenv("MONGO_HOST")
+        MONGO_URI = os.getenv("MONGO_URI")
             
         #connect to the database
-        client = pymongo.MongoClient(f"mongodb+srv://{username}:{password}@{mongo_host}", server_api=ServerApi('1'))
+        client = pymongo.MongoClient(MONGO_URI, server_api=ServerApi('1'))
         db = client['SDP']
 
         print(bcolors.OKGREEN + "Connected to the database" + bcolors.ENDC)
@@ -59,6 +58,9 @@ class Database():
         with open(path, "rb") as file:
             encoded = base64.b64encode(file.read())
         self.OutputData.put(encoded, filename=filename, username=username, base_dataset=base_dataset_filename)
+
+    def load_user(self,username,email,password):
+        self.User.insert_one({"Username": username, "Email": email, "Password": password})
 
     def get_input_data(self, filename):
         username = filename.split("-")[0]
@@ -89,6 +91,13 @@ class Database():
         '''Return a list of pointers of all the output dataset of the user'''
         return self.OutputData.find()
 
+    def get_user(self,username=None, email=None):
+        '''Return the user with the given username or email'''
+        if username is not None:
+            return self.User.find_one({"Username": username})
+        elif email is not None:
+            return self.User.find_one({"Email": email})
+        
 
 
 
