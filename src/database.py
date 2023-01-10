@@ -6,6 +6,9 @@ from getpass import getpass
 import gridfs
 from dotenv import load_dotenv
 from src.util import bcolors
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 load_dotenv("config/.env")
