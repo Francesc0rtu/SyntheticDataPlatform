@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8" />
+    <title>Documentation</title>
+</head>
+<body>
+    <h1>Documentation</h1>
+    <hr>
+    <br><br><br>
+
+    <p  style="text-align:left;">
+    <h3 style="text-align:left;">1. The structure of the JSON file</h3>
+    <p  style="text-align:left;"> The JSON file is used to describe the structure of the dataset. It contains the following fields: </p>
+        <code style="text-align:left;">
+            <ul>
+                <li>dataset_name: the name of the dataset</li>
+                <li>dataset_description: a description of the dataset</li>
+                <li>dataset_size: the number of rows in the dataset</li>
+                <li>columns: a list of columns</li>
+            </ul>
+        </code>
+    </p>
+</body>
+
+
+{% endblock %}

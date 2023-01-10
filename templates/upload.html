@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-{% block title%} {{ title }} {% endblock %}
-{% block content%}
+{% extends "base.html" %}
+{% block content %}
 <html lang="en">
-  <div align="right">
-    {% if current_user.is_authenticated %}
-      <p>Hello, {{ username }}!</p>
-    {% endif %}
-    <b> <a href="logout"> Logout </a></b>
-  </div>
   <div align="center">
     <div align="center" class="border">
       <head>
@@ -16,7 +9,6 @@
           
       </head>
       <body>
-          <h1> <a href="files">Download synthetic data</a> </h1>
           <h1>Generate synthetic data from your dataset</h1>
           <hr>
           <p>
