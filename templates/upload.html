@@ -1,31 +1,36 @@
 <!DOCTYPE html>
+{% block title%} {{ title }} {% endblock %}
+{% block content%}
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>File upload</title>
-    </head>
-    <body>
-        <h1> <a href="files">Download synthetic data</a> </h1>
-        <h1>Generate synthetic data from your dataset</h1>
-        <hr>
-        <p>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
-        </p>
-        <h3>Select a file to upload</h3>
-        <form action="/" method="POST" enctype="multipart/form-data">
-            <p>Upload .zip files:</p>
-            <input type="file" name="file" />
-            <p>Upload JSON metadata file:</p>
-            <input type="file" name="metadata" />
-            <input type="submit" value="Submit" />
-        </form>
-    </body>
+  <div align="center">
+    <div align="center" class="border">
+      <head>
+          <meta charset="UTF-8" />
+          <title>File upload</title>
+      </head>
+      <body>
+          <h1> <a href="files">Download synthetic data</a> </h1>
+          <h1>Generate synthetic data from your dataset</h1>
+          <hr>
+          <p>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class=flashes>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+          </p>
+          <h3>Select a file to upload</h3>
+          <form action="/" method="POST" enctype="multipart/form-data">
+              <p>Upload all csv files and the json description:</p>
+              <input type="file" name="file" multiple="">
+              <input type="submit" value="Submit" />
+          </form>
+      </body>
+    </div>
+  </div>
 </html>
+{% endblock %}

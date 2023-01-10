@@ -34,7 +34,7 @@ def generate_synthetic_data(filename):
 
     # Load the result into the database
     db = Database()
-    # db.load_input_data(filename)
+    db.load_input_data(filename)
     db.load_output_data("Synt:" + filename, filename)
 
     # Delete the input dataset

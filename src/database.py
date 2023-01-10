@@ -53,6 +53,7 @@ class Database():
     
     def load_output_data(self, filename, base_dataset_filename):
         username = filename.split("-")[0]
+        username = username.split(":")[1]
         path = "DATA/output/" + filename
 
         with open(path, "rb") as file:
@@ -80,6 +81,13 @@ class Database():
         file = self.OutputData.find_one(filter={"filename": filename, "username": username})
         with open(path, 'wb') as f:  
             f.write(base64.b64decode(file.read()))
+
+    def get_all_input_data(self, username):
+        '''Return a list of pointers of all the input dataset of the user.'''
+        return self.InputData.find(filter={"username": username})
+    def get_all_output_data(self):
+        '''Return a list of pointers of all the output dataset of the user'''
+        return self.OutputData.find()
 
 
 

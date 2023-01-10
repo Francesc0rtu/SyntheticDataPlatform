@@ -1,8 +1,10 @@
 import logging
 import os.path
 
-from flask import Flask, render_template, request, redirect, flash, send_from_directory
+from flask import Flask, render_template, request, redirect,  flash, send_from_directory, url_for
 from werkzeug.utils import secure_filename
+
+
 
 # [logging config
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(filename)s:%(funcName)s:%(message)s',
@@ -15,20 +17,25 @@ app = Flask(__name__)
 app.secret_key = "somesecretkey"
 
 app.config['ALLOWED_EXTENSIONS'] = ['.jpg', '.png', '.csv', '.zip']
-app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 100000 * 1024 * 1024
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'DATA/input_data')
-DOWNLOAD_FOLDER  = os.path.join(os.getcwd(), 'DATA/download')
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'DATA/input')
+DOWNLOAD_FOLDER  = os.path.join(os.getcwd(), 'DATA/output')
 
 
-# http://localhost:5000
 @app.route('/', methods=['GET'])
 def index():
-    logging.info('Showing index page')
+    return redirect(url_for('login'))
+
+
+# http://localhost:5000/upload
+@app.route('/upload', methods=['GET'])
+def upload():
+    logging.info('Showing upload page')
     return render_template('upload.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def upload_files():
     """Upload a file."""
     logging.info('Starting file upload')
@@ -37,28 +44,11 @@ def upload_files():
         flash('No file part')
         return redirect(request.url)
 
-    file = request.files['file']
-    metadata  = request.files['metadata']
-    # obtaining the name of the destination file
-    filename = file.filename
-    metadata_name  = metadata.filename
-    if filename == '':
-        logging.info('Invalid file')
-        flash('No file selected for uploading')
-        return redirect(request.url)
-    else:
-        logging.info('Selected file is= [%s]', filename)
-        file_ext = os.path.splitext(filename)[1]
-        if file_ext in app.config['ALLOWED_EXTENSIONS']:
-            secure_fname = secure_filename(filename)
-            file.save(os.path.join(UPLOAD_FOLDER, secure_fname))
-            logging.info('Upload is successful')
-            flash('File uploaded successfully')
-            return redirect('/')
-        else:
-            logging.info('Invalid file extension')
-            flash('Not allowed file type')
-            return redirect(request.url)
+    files = request.files.getlist("file")
+    for file in files:
+       file.save(os.path.join(UPLOAD_FOLDER, file.filename))
+ 
+    return redirect('/upload')
 
 
 @app.route('/download/<path:filename>', methods=['GET'])
@@ -91,8 +81,37 @@ def check_upload_dir():
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('upload'))
+    return render_template('login.html', error=error)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+    
+        if username == 'admin' and password == 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        
+            
+    return render_template('register.html', error=error)
+
+
 if __name__ == '__main__':
     check_upload_dir()
     # Development only: run "python app.py" and open http://localhost:5000
-    server_port = os.environ.get('PORT', '5000')
+    server_port = os.environ.get('PORT', '8000')
     app.run(debug=False, port=server_port, host='0.0.0.0')
+
+
+
