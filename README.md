@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 
 ## Usage
-To run the application you need a MongoDB ATLAS database. You can create a free cluster [here](https://www.mongodb.com/cloud/atlas). Then, you need to create a `.env` file in the root directory of the project. The file should contain the following variables:
+To run the application you need a MongoDB ATLAS database. You can create a free cluster [here](https://www.mongodb.com/cloud/atlas). Then, you need to create a `config/.env` file in the root directory of the project. The file should contain the following variables:
 ```bash
 MONGO_URI=<your-mongo-uri>
 ```
@@ -19,6 +19,15 @@ collection ---> SDP
                 |--> OutputDataset <--- GridFS with (filename, username, base_dataset)
 ```
 ### Docker
+Build the image
+```bash
+$ docker build -t sdp .
+```
+Run the container
+```bash
+$ docker run  --env-file config/.env sdp
+```
+
 
 ### Clone the repo
 The application require `Python 3.9.15`.

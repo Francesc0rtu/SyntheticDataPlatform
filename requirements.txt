@@ -7,3 +7,4 @@ python-dotenv==0.21.0
 sdv==0.17.2
 Werkzeug==2.0.1
 WTForms==2.3.3
+email-validator==1.1.3
