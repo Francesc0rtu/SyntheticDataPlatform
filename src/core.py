@@ -5,7 +5,7 @@ import shutil
 import os
 
 
-def generate_synthetic_data(filename):
+def generate_synthetic_data(filename, description, input_openess):
     '''From filename the function generates a synthetic dataset and upload the input and the output dataset in the database.
     All the local data are deleted after the process.
     '''
@@ -34,8 +34,8 @@ def generate_synthetic_data(filename):
 
     # Load the result into the database
     db = Database()
-    db.load_input_data(filename)
-    db.load_output_data("Synt:" + filename, filename)
+    db.load_input_data(filename, description, input_openess)
+    db.load_output_data("Synt:" + filename, base_dataset_availability=input_openess, description=description)
 
     # Delete the input dataset
     os.remove("DATA/input/" + filename)

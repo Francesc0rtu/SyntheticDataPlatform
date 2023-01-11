@@ -22,19 +22,23 @@
                 {% endif %}
               {% endwith %}
           </p>
-          <h3>Select a file to upload</h3>
+
           <form action="/upload" method="POST" enctype="multipart/form-data">
             {{ form.csrf_token }}
-              <p>Upload all csv files and the json description:</p>
-              {{form.files(multiple="multiple")}}
-              {{form.dataset_name}}
+              <p>Upload all csv files and the json description of the relationships:</p> <br> <br>
+              {{form.files(multiple="multiple")}} 
+              {{ form.dataset_name.label }} 
+              {{form.dataset_name}} &emsp;
+              {{ form.openess.label }} {{ form.openess(class="form-control") }} <br> <br>
+              {{ form.description.label }}  {{form.description(rows=10, cols=30)}} <br> 
               <!-- <input type="string" name="description" placeholder="Dataset Name"> -->
               {{ form.submit }}
           </form>
           <br><br>
           {% if msg %}
              {{ msg }}
-          {% endif %}
+          {% endif %} 
+          <br><br>
           For more information about the format of the json file, please refer to the <a href="documentation">documentation</a>.
       </body>
     </div>

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import MultipleFileField, StringField, SubmitField, PasswordField, validators
+from wtforms import TextAreaField, SelectField, SelectMultipleField, MultipleFileField, StringField, SubmitField, PasswordField, validators
 from wtforms.validators import DataRequired
-
+from wtforms.widgets import TextArea
 
 
 class Login(FlaskForm):
@@ -29,5 +29,7 @@ class Register(FlaskForm):
 class Upload(FlaskForm):
     files = MultipleFileField('Upload File')
     dataset_name = StringField('Dataset Name', validators=[DataRequired()])
+    description = TextAreaField('Description', widget=TextArea())
+    openess = SelectField('Availability', choices=[('open', 'Open'), ('close', 'Private')], validators=[DataRequired()])
     submit = SubmitField('Upload')
     

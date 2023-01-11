@@ -8,12 +8,43 @@
     <body>
         <h1>Download upload files</h1>
         <hr>
-        <ul>
+            <table style="width:100%", border="1">
+                <tr>
+                    <th>Dataset Name</th>
+                    <th>Description</th>
+                    <th>User</th>
+                    <th>Original Dataset Availability</th>
+                    <th>Upload Date</th>
+                    <th>Download</th>
+                </tr>
+                {% for file in list_of_files_info %}
+                    <tr>
+                        <td> {{ file.Dataset_Name }} </td>
+                        <td> {{ file.Description }} </td>
+                        <td> {{ file.User }} </td>
+                        {% if file.Base_Dataset == "Open" %}
+                            <td> <a href="{{ url_for('downloadInput', data_id=file.Dataset_id) }}">{{ file.Base_Dataset }}</a> </td>
+                        {% else %}
+                            <td> {{ file.Base_Dataset }} </td>
+                        {% endif %}
+                        <td> {{ file.Base_Dataset }} </td>
+                        <td> {{ file.Upload_Data}} </td>
+                        <td> <a href="{{ url_for('download', data_id=file.Dataset_id) }}">{{ file.Dataset_Name }}</a> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </body>
+
+        
+
+
+
+        <!-- <ul>
             {% for file in files %}
             <li><a href="{{ url_for('download', filename=file) }}">{{ file }}</a></li>
             {% endfor %}
         </ul>
     </body>
-</html>
+</html> -->
 
 {% endblock %}

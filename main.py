@@ -9,7 +9,7 @@ from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 
 #import src module
-from src.database import Database
+from src.database import Database, ListOfdatasets
 from src.util import check_user_exist, zip_and_move
 from src.form import Login, Register, Upload
 from src.core import generate_synthetic_data
@@ -145,29 +145,33 @@ def upload():
 
 
 # * Download page
-@app.route('/download/<path:filename>', methods=['GET'])
-def download(filename):
+@app.route('/download/<path:data_id>', methods=['GET'])
+def download(data_id):
     """Download a file."""
-    logging.info('Downloading file= [%s]', filename)
-    logging.info(app.root_path)
-    full_path = os.path.join(app.root_path, DOWNLOAD_FOLDER)
-    logging.info(full_path)
+    full_path = database.get_output_data(id=data_id)
+    filename = full_path.split('/')[-1]
+    full_path = full_path.split(filename)[0]
+
     return send_from_directory(full_path, filename, as_attachment=True)
 
+# * Download page
+@app.route('/downloadInput/<path:data_id>', methods=['GET'])
+def downloadInput(data_id):
+    """Download a file."""
+    full_path = database.get_input_dataset_from_output_id(id=data_id)
+    filename = full_path.split('/')[-1]
+    full_path = full_path.split(filename)[0]
+
+    return send_from_directory(full_path, filename, as_attachment=True)
 
 # http://localhost:5000/files
 @app.route('/files', methods=['GET'])
 def list_files():
     """Endpoint to list files."""
-    logging.info('Listing already uploaded files from the upload folder.')
-    upf = []
-    for filename in os.listdir(DOWNLOAD_FOLDER):
-        path = os.path.join(DOWNLOAD_FOLDER, filename)
-        if os.path.isfile(path):
-            upf.append(filename)
+    files = ListOfdatasets(database).get_dicts()
 
     # return jsonify(uploaded_files)
-    return render_template('list.html', files=upf)
+    return render_template('list.html', list_of_files_info=files)
 
 @app.route('/documentation', methods=['GET'])
 def documentation():
