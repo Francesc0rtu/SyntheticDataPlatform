@@ -41,6 +41,11 @@ class Database():
             
         #connect to the database
         client = pymongo.MongoClient(MONGO_URI, server_api=ServerApi('1'))
+        try:
+            client.server_info()
+        except:
+            print(bcolors.FAIL + "Unable to connect to the database" + bcolors.ENDC)
+            exit(1)
         db = client['SDP']
 
         print(bcolors.OKGREEN + "Connected to the database" + bcolors.ENDC)
