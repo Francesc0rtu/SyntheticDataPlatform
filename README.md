@@ -1,6 +1,6 @@
 # Synthetic Data Platform
 
-[![Docker Image Size](https://badgen.net/docker/size/trueosiris/godaddypy?icon=docker&label=image%20size)](https://hub.docker.com/r/trueosiris/godaddypy/)
+[![Docker Image Size](https://badgen.net/docker/size/trueosiris/godaddypy?icon=docker&label=image%20size)](https://hub.docker.com/r/francescortu/sdp)
 ![License MIT](https://img.shields.io/github/license/Francesc0rtu/SyntheticDataPlatform)
 ## Usage
 To run the application you need a MongoDB ATLAS database. You can create a free cluster [here](https://www.mongodb.com/cloud/atlas). Then, you need to create a `config/.env` file in the root directory of the project. The file should contain the following variables:
