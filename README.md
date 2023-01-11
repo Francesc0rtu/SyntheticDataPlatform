@@ -22,11 +22,11 @@ $ docker build -t sdp .
 ```
 or pull the image
 ```bash
-$ docker pull francescortu/sdp:v1.0
+$ docker pull francescortu/sdp:v1.0.1
 ```
 Run the container
 ```bash
-$ docker run  --env-file config/.env sdp
+$ docker run  --env-file config/.env francescortu/sdp:v1.0.1
 ```
 
 
