@@ -1,10 +1,7 @@
 # Synthetic Data Platform
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 
+[![Docker Image Size](https://img.shields.io/docker/image-size/francescortu/sdp?logo=docker)](https://hub.docker.com/r/francescortu/sdp)
+![License MIT](https://img.shields.io/github/license/Francesc0rtu/SyntheticDataPlatform)
 ## Usage
 To run the application you need a MongoDB ATLAS database. You can create a free cluster [here](https://www.mongodb.com/cloud/atlas). Then, you need to create a `config/.env` file in the root directory of the project. The file should contain the following variables:
 ```bash
@@ -22,6 +19,10 @@ collection ---> SDP
 Build the image
 ```bash
 $ docker build -t sdp .
+```
+or pull the image
+```bash
+$ docker pull francescortu/sdp:v1.0
 ```
 Run the container
 ```bash
@@ -65,3 +66,5 @@ $ python main.py
 [license-shield]: https://img.shields.io/github/license/Francesc0rtu/SyntheticDataPlatform.svg?style=for-the-badge
 
 [license-url]: https://github.com/Francesc0rtu/SyntheticDataPlatform/blob/main/LICENSE
+
+
