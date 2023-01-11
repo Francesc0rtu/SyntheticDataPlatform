@@ -4,6 +4,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Docker Image Size](https://badgen.net/docker/size/trueosiris/godaddypy?icon=docker&label=image%20size)](https://hub.docker.com/r/trueosiris/godaddypy/)
 
 ## Usage
 To run the application you need a MongoDB ATLAS database. You can create a free cluster [here](https://www.mongodb.com/cloud/atlas). Then, you need to create a `config/.env` file in the root directory of the project. The file should contain the following variables:
@@ -65,3 +66,5 @@ $ python main.py
 [license-shield]: https://img.shields.io/github/license/Francesc0rtu/SyntheticDataPlatform.svg?style=for-the-badge
 
 [license-url]: https://github.com/Francesc0rtu/SyntheticDataPlatform/blob/main/LICENSE
+
+
