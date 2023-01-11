@@ -1,4 +1,7 @@
-{
+{   "dataset name": "example",
+    "dataset description": "Example dataset for testing",
+    "license": "CC0",
+    "numeber of tables": 3,
     "tables": {
         "users": {
             "fields": {

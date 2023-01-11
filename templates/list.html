@@ -27,7 +27,6 @@
                         {% else %}
                             <td> {{ file.Base_Dataset }} </td>
                         {% endif %}
-                        <td> {{ file.Base_Dataset }} </td>
                         <td> {{ file.Upload_Data}} </td>
                         <td> <a href="{{ url_for('download', data_id=file.Dataset_id) }}">{{ file.Dataset_Name }}</a> </td>
                     </tr>

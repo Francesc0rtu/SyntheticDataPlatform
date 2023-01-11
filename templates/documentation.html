@@ -11,15 +11,34 @@
 
     <p  style="text-align:left;">
     <h3 style="text-align:left;">1. The structure of the JSON file</h3>
-    <p  style="text-align:left;"> The JSON file is used to describe the structure of the dataset. It contains the following fields: </p>
+    <p  style="text-align:left;"> The JSON file is used to describe the structure of the dataset.
+        A node table should be made for each table in your dataset.
+        It contains the configuration on how to handle this table. It has the following elements: </p>
         <code style="text-align:left;">
+            <p  style="text-align:left;">  metadata.json </p> <br>
             <ul>
-                <li>dataset_name: the name of the dataset</li>
-                <li>dataset_description: a description of the dataset</li>
-                <li>dataset_size: the number of rows in the dataset</li>
-                <li>columns: a list of columns</li>
+                <li>"dataset name": "example",</li>
+                <li> "license": "CC0" ,</li>
+                <li> "description": "This is an example dataset" ,</li>
+                <li> "number of tables": 3 ,</li>
+                <li>"tables": {</li>
+                <li> &emsp; "users": {</li>
+                <li>&emsp;&emsp; "fields": { </li>
+
+                <li> &emsp; &emsp; &emsp;   "country":{ </li>
+                <li> &emsp; &emsp; &emsp; &emsp; "type": "string", </li>
+                <li> &emsp; &emsp; &emsp; &emsp; "description": "The country of the user" </li>
+                <li> &emsp; &emsp; &emsp;   ... </li>
+                <li> &emsp; &emsp; &emsp;   }, </li>
+                <li> &emsp; &emsp; }</li>
+                <li>&emsp;&emsp; "path": "users.csv", </li>
+                <li>&emsp;&emsp; "primary_key": "user_id",</li>         
+                <li>&emsp;    } </li>
+                <li> ... </li>
+                <li> } </li>  
             </ul>
         </code>
+        For more information on the structure of the JSON file, please refer to the <a href="https://sdv.dev/SDV/developer_guides/sdv/metadata.html">SDV documentation</a>.
     </p>
 </body>
 
