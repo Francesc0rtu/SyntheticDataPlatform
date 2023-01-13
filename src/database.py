@@ -129,11 +129,19 @@ class Database():
             return True
         return False
     
-    def get_input_dataset_from_output_id(self, id):
+    def get_input_dataset_from_output_id(self, id, external=False):
         file = self.OutputData.find_one({"_id": ObjectId(id)})
-        filename = file.filename.split(":")[1]
-        path =  self.get_input_data(filename)
-        return path
+        if external is False:
+            filename = file.filename.split(":")[1]
+            path =  self.get_input_data(filename)
+            return path, file
+
+        if external is True:
+            path = None
+            filename = file.filename.split(":")[1]
+            username = filename.split("-")[0]
+            file = self.InputData.find_one(filter={"filename": filename, "username": username})
+            return path, file
 
 
 

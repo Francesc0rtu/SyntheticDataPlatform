@@ -159,11 +159,20 @@ def download(data_id):
 @app.route('/downloadInput/<path:data_id>', methods=['GET'])
 def downloadInput(data_id):
     """Download a file."""
-    full_path = database.get_input_dataset_from_output_id(id=data_id)
+    full_path, _ = database.get_input_dataset_from_output_id(id=data_id)
     filename = full_path.split('/')[-1]
     full_path = full_path.split(filename)[0]
 
     return send_from_directory(full_path, filename, as_attachment=True)
+    
+    # * Download page
+@app.route('/downloadExternal/<path:data_id>', methods=['GET'])
+def getExternal(data_id):
+    """Download a file."""
+    full_path, file = database.get_input_dataset_from_output_id(id=data_id, external=True)
+    external_link = file.external_link
+
+    return redirect("http://" + external_link)
 
 # http://localhost:5000/files
 @app.route('/files', methods=['GET'])

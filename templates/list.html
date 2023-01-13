@@ -14,8 +14,10 @@
                     <th>Description</th>
                     <th>User</th>
                     <th>Original Dataset Availability</th>
+                    <th>Original Dataset external link</th>
                     <th>Upload Date</th>
                     <th>Download Synthetic Data</th>
+                    
                 </tr>
                 {% for file in list_of_files_info %}
                     <tr>
@@ -24,6 +26,7 @@
                         <td> {{ file.User }} </td>
                         {% if file.Base_Dataset == "Open" %}
                             <td> <a href="{{ url_for('downloadInput', data_id=file.Dataset_id) }}">{{ file.Base_Dataset }}</a> </td>
+                            <td> <a href="{{ url_for('getExternal', data_id=file.Dataset_id) }}"> External source </a> </td>
                         {% else %}
                             <td> {{ file.Base_Dataset }} </td>
                         {% endif %}
