@@ -131,9 +131,10 @@ def upload():
             file_filename = secure_filename(file.filename)
             file.save(path + file_filename)
   
-
+    
         filename = zip_and_move(path, current_user.username, dataset_name)
-        generate_synthetic_data(filename)
+
+        generate_synthetic_data(filename, form.description.data, form.openess.data)
         msg = "Synthetic data generated successfully"
   
     return render_template('upload.html', username=username, form=form, msg=msg)

@@ -30,6 +30,6 @@ class Upload(FlaskForm):
     files = MultipleFileField('Upload File')
     dataset_name = StringField('Dataset Name', validators=[DataRequired()])
     description = TextAreaField('Description', widget=TextArea())
-    openess = SelectField('Availability', choices=[('open', 'Open'), ('close', 'Private')], validators=[DataRequired()])
+    openess = SelectField('Availability', choices=[('Open', 'Open'), ('Close', 'Private')], validators=[DataRequired()])
     submit = SubmitField('Upload')
     

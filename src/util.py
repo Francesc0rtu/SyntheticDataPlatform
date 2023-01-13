@@ -32,7 +32,7 @@ def zip_and_move(path, username, dataset_name):
                 zip_file.write(os.path.join(root, file), file)
     for _, _, files in os.walk(path):
         for file in files:
-            os.remove(path + file)
+            os.remove(path +  file)
     return zip_filename
             
     

@@ -1,0 +1,55 @@
+{
+    "dataset name" : "E-commerce sales dataset",
+    "dataset link" : "https://www.kaggle.com/datasets/berkayalan/ecommerce-sales-dataset",
+    "license": "Data files © Original Authors",
+    "description" : "This dataset contains sales details of an E-Commerce platform. It covers 20.000 unique customers and 150.000 basket transactions.",
+    "numeber of tables": 2,
+    "tables": {
+        "customer_details":{
+            "fields":{
+                "customer_id":{ 
+                    "type": "id",
+                    "subtype": "integer"
+                },
+                "sex":{ 
+                    "type": "categorical"
+                },
+                "customer_age":{ 
+                    "type": "categorical"
+                },
+                "tenure":{ 
+                    "type": "numerical",
+                    "subtype": "integer"
+                }
+            },
+            "primary_key": "customer_id"
+        },
+        "basket_details":{
+            "fields":{
+                "customer_id": {
+                    "type": "id",
+                    "subtype": "integer",
+                    "ref":{
+                        "table": "custumer_details",
+                        "field": "customer_id"
+                    }
+                },
+                "product_id": {
+                    "type": "id",
+                    "subtype": "integer"
+                },
+                "basket_date": {
+                    "type": "datetime",
+                    "format": "%Y-%m-%d"
+                },
+                "basket_count": {
+                    "type": "numerical",
+                    "subtype": "integer"
+                }
+            },
+            "primary_key": "product_id"
+        }
+
+        }
+    }
+
