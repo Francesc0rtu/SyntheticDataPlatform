@@ -29,6 +29,7 @@
                             <td> <a href="{{ url_for('getExternal', data_id=file.Dataset_id) }}"> External source </a> </td>
                         {% else %}
                             <td> {{ file.Base_Dataset }} </td>
+                            <td> NaN </td>
                         {% endif %}
                         <td> {{ file.Upload_Data}} </td>
                         <td> <a href="{{ url_for('download', data_id=file.Dataset_id) }}">{{ file.Dataset_Name }}</a> </td>

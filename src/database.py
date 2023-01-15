@@ -26,18 +26,9 @@ class Database():
         '''Connect to the database, if the user has not saved the credential in env variable, ask for them.
         The mongodb databse is auth also with IP.
         '''
-        #print("To connect to the database, please enter the following information:")
-        # auto_login = input("Do you want connect with saved credential? (y/n): ")
-        # if auto_login == "y":
-        #     username = os.getenv("MONGO_USER")
-        #     password = os.getenv("MONGO_PASS")
-        #     mongo_host = os.getenv("MONGO_HOST")
-        # else:
-        #     mongo_host = input("Name of the mongo project: ")
-        #     username = input("Username: ") 
-        #     password = getpass()
 
         MONGO_URI = os.getenv("MONGO_URI")
+
             
         #connect to the database
         client = pymongo.MongoClient(MONGO_URI, server_api=ServerApi('1'))
@@ -176,7 +167,9 @@ class ListOfdatasets():
 
 
     
-
+####### IMPLEMENT
+# URI
+# dataset/
 
 
 
