@@ -3,6 +3,7 @@ from src.database import Database
 import zipfile
 import shutil
 import os
+import json
 
 
 def generate_synthetic_data(filename, description, input_openess):
@@ -15,7 +16,7 @@ def generate_synthetic_data(filename, description, input_openess):
         zip_ref.extractall("DATA/input/tmp/" + filename.split(".")[0])
     external_link = None
     if input_openess == "Open":
-        external_link = json.load(open("DATA/input/tmp/" + filename.split(".")[0] + "/external_link.json", "r"))["dataset link"]
+        external_link = json.load(open("DATA/input/tmp/" + filename.split(".")[0] + "/metadata.json", "r"))["dataset link"]
 
     # Generate synthetic data
     synthetic_data = Synthetic_data()
@@ -36,7 +37,7 @@ def generate_synthetic_data(filename, description, input_openess):
 
     # Load the result into the database
     db = Database()
-    db.load_input_data(filename, description, input_openess, external_link)
+    db.load_input_data(filename, description, input_openess)
     db.load_output_data("Synt:" + filename, base_dataset_availability=input_openess, description=description)
 
     # Delete the input dataset
